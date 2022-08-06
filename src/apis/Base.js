@@ -3,7 +3,7 @@ import { ObjectUtils } from "pangju-utils";
 import { ElNotification } from "element-plus";
 
 const apiConfig = {
-  baseURL: `${process.env.VITE_APP_BASE_URL}`,
+  baseURL: import.meta.env.VITE_BASE_URL,
   // 请求超时时间设置
   timeout: 10 * 1000,
   crossDomain: true,
