@@ -17,5 +17,13 @@
   "plugins": [
     "vue",
     "prettier"
-  ]
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "tabWidth": 4
+      }
+    ]
+  }
 }
