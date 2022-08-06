@@ -1,3 +1,2 @@
-dist
-public
-index.html
+# 测试和打包目录
+node_modules
