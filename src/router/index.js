@@ -8,12 +8,12 @@ const routes = [
   {
     path: "/index",
     name: "Index",
-    component: () => import("@/views/index"),
+    component: () => import("views/indexView.vue"),
   },
   {
     path: "/login",
     name: "Login",
-    component: () => import("@/views/login"),
+    component: () => import("views/loginView.vue"),
   },
 ];
 

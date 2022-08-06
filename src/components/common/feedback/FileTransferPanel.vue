@@ -4,29 +4,28 @@
       <div>
         <span>传输面板</span>
         <el-icon class="float-right cursor-pointer" @click="visible">
-          <close/>
+          <close />
         </el-icon>
       </div>
     </template>
     <el-table :data="fileList" :fit="false" height="250">
-      <el-table-column label="文件名" prop="fileName" width="180"/>
+      <el-table-column label="文件名" prop="fileName" width="180" />
       <el-table-column label="进度条" prop="progress" width="180">
         <template #default="{ row }">
-          <el-progress :percentage="row.progress"/>
+          <el-progress :percentage="row.progress" />
         </template>
       </el-table-column>
-      <el-table-column label="传输类型" prop="type" width="120"/>
-      <el-table-column label="状态" prop="status" width="120"/>
+      <el-table-column label="传输类型" prop="type" width="120" />
+      <el-table-column label="状态" prop="status" width="120" />
       <el-table-column label="操作" width="120">
         <template #default="{ row }">
           <el-button
-              class="cancel-button"
-              size="small"
-              type="danger"
-              @click="cancel(row)"
-          >取消
-          </el-button
-          >
+            class="cancel-button"
+            size="small"
+            type="danger"
+            @click="cancel(row)"
+            >取消
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -34,9 +33,9 @@
 </template>
 
 <script setup>
-import {useFileTransferStore} from "@/store/FileTransferPanel.js";
-import {Close} from "@element-plus/icons-vue";
-import {computed} from "vue";
+import { useFileTransferStore } from "@/store/FileTransferPanel.js";
+import { Close } from "@element-plus/icons-vue";
+import { computed } from "vue";
 
 const store = useFileTransferStore();
 
@@ -49,7 +48,7 @@ const visible = computed({
 });
 
 const cancel = (row) => {
-  store.cancelDownload({cancelToken: row.cancel, fileId: row.fileId});
+  store.cancelDownload({ cancelToken: row.cancel, fileId: row.fileId });
 };
 </script>
 

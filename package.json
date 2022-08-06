@@ -7,13 +7,13 @@
     "dev": "vite --mode develop",
     "build": "vite build",
     "preview": "vite preview --mode develop",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "prettier": "prettier --write **/*.{vue,js,json}"
   },
   "lint-staged": {
-    "*./src/**/*.{vue,js,ts}": [
-      "eslint src/**/*.{vue,js,ts}",
-      "prettier --write",
-      "stylelint src/**/*.{less,vue}"
+    "**/*.{vue,js,json,less}": [
+      "eslint **/*.{vue,js,json}",
+      "prettier --write **/*.{vue,js,json}"
     ]
   },
   "dependencies": {

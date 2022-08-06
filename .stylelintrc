@@ -13,7 +13,5 @@
     "**/*.tsx",
     "**/*.ts"
   ],
-  "rules": {
-    "indentation": 4
-  }
+  "rules": {}
 }

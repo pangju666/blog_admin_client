@@ -1,16 +1,17 @@
 <template>
   <div>
     <el-config-provider :locale="zhCn">
-      <router-view/>
+      <router-view />
     </el-config-provider>
-    <file-transfer-panel/>
+    <file-transfer-panel />
   </div>
 </template>
 
 <script setup>
-import {ElConfigProvider} from "element-plus";
+import { ElConfigProvider } from "element-plus";
 import zhCn from "element-plus/lib/locale/lang/zh-cn";
-import FileTransferPanel from "components/common/feedback/FileTransferPanel.vue";</script>
+import FileTransferPanel from "components/common/feedback/FileTransferPanel.vue";
+</script>
 
 <style lang="less">
 * {
