@@ -19,11 +19,9 @@
     "prettier"
   ],
   "rules": {
-    "prettier/prettier": [
+    "indent": [
       "error",
-      {
-        "tabWidth": 4
-      }
+      4
     ]
   }
 }

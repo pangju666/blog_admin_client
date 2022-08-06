@@ -7,16 +7,13 @@
     "dev": "vite --mode develop",
     "build": "vite build",
     "preview": "vite preview --mode develop",
-    "lint": "eslint src/**/*.{js,ts}"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "*./src/**/*.{js,ts}": [
-      "eslint src/**/*.{js,ts}"
+    "*./src/**/*.{vue,js,ts}": [
+      "eslint src/**/*.{vue,js,ts}",
+      "prettier --write",
+      "stylelint src/**/*.{less,vue}"
     ]
   },
   "dependencies": {
@@ -41,6 +38,10 @@
     "lint-staged": "^13.0.3",
     "less": "^4.1.3",
     "prettier": "^2.7.1",
+    "stylelint": "^14.9.1",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^26.0.0",
+    "stylelint-order": "^5.0.0",
     "unplugin-auto-import": "^0.11.0",
     "unplugin-element-plus": "^0.4.1",
     "unplugin-vue-components": "^0.22.0",
