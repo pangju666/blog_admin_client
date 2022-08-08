@@ -19,6 +19,9 @@
       ],
       "assets/*": [
         "src/assets/*"
+      ],
+      "layout/*": [
+        "src/layout/*"
       ]
     },
     "lib": [

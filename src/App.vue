@@ -10,7 +10,7 @@
 <script setup>
 import { ElConfigProvider } from "element-plus";
 import zhCn from "element-plus/lib/locale/lang/zh-cn";
-import FileTransferPanel from "components/common/feedback/FileTransferPanel.vue";
+import FileTransferPanel from "components/common/feedback/PjFileTransferPanel.vue";
 </script>
 
 <style lang="less">

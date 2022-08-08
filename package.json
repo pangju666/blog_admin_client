@@ -12,7 +12,7 @@
   },
   "lint-staged": {
     "**/*.{vue,js,json,less}": [
-      "eslint **/*.{vue,js,json}",
+      "eslint **/*.{vue,js,json} --fix",
       "prettier --write **/*.{vue,js,json}"
     ]
   },
