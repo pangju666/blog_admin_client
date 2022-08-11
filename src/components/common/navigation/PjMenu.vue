@@ -46,7 +46,7 @@
 import PjMenuItem from "components/common/navigation/PjMenuItem.vue";
 import PjSvgIcon from "components/common/basic/PjSvgIcon.vue";
 
-const props = defineProps({
+defineProps({
   items: {
     type: Array,
     required: true,
@@ -63,7 +63,7 @@ const props = defineProps({
   },
 });
 
-const emits = defineEmits(["click"]);
+defineEmits(["click"]);
 </script>
 
 <style>

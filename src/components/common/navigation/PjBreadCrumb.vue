@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   separator: {
     type: String,
     default: "/",
@@ -37,7 +37,7 @@ const props = defineProps({
   },
 });
 
-const emits = defineEmits(["click-item"]);
+defineEmits(["click-item"]);
 </script>
 
 <style lang="less" scoped>

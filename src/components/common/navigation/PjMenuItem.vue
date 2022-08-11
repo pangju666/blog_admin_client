@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   item: {
     type: Object,
     required: true,
@@ -48,5 +48,5 @@ const props = defineProps({
   },
 });
 
-const emits = defineEmits(["click"]);
+defineEmits(["click"]);
 </script>
