@@ -21,13 +21,6 @@
     "no-console": "warn",
     "no-debugger": "warn",
     "linebreak-style": "off",
-    "vue/multi-word-component-names": [
-      "error",
-      {
-        "ignores": [
-          "index"
-        ]
-      }
-    ]
+    "vue/require-default-prop": "off"
   }
 }

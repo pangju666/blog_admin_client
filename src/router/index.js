@@ -1,23 +1,45 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
-const routes = [
+export const routes = [
   {
     path: "/",
     redirect: "/index",
+    title: "起始页",
+    hidden: true,
+  },
+  {
+    path: "/home",
+    title: "起始页",
+    children: [
+      {
+        path: "/home2",
+        name: "Home2",
+        title: "首页",
+        component: () => import("views/HomeView.vue"),
+      },
+    ],
   },
   {
     path: "/index",
     name: "Index",
-    component: () => import("layout/index.vue"),
+    title: "首页",
+    component: () => import("views/IndexView.vue"),
   },
   {
     path: "/login",
     name: "Login",
-    component: () => import("views/loginView.vue"),
+    title: "登录页",
+    hidden: true,
+    component: () => import("views/LoginView.vue"),
   },
 ];
 
 export const router = createRouter({
   history: createWebHashHistory(),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  console.log(to);
+  next();
 });

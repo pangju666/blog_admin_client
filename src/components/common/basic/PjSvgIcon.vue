@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "svg-icon",
+  name: "PjSvgIcon",
   props: {
     svgStyle: {
       type: String,
