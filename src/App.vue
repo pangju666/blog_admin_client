@@ -1,16 +1,48 @@
 <template>
-  <div>
-    <el-config-provider :locale="zhCn">
-      <router-view />
-    </el-config-provider>
+  <el-config-provider :locale="zhCn">
+    <el-container class="wh-100">
+      <el-aside
+        :width="collapse ? sidebarCollapseWidth : sidebarWidth"
+        class="h-100 container-aside"
+      >
+        <page-side-bar
+          :collapse="collapse"
+          :collapse-width="sidebarCollapseWidth"
+        />
+      </el-aside>
+      <el-container class="h-100 p-10">
+        <el-header class="p-0" height="60px">
+          <page-header @change="collapse = $event" />
+        </el-header>
+        <el-main style="height: calc(100% - 120px)">
+          <!--          <transition>
+                      <keep-alive>
+                        <router-view />
+                      </keep-alive>
+                    </transition>-->
+          <router-view />
+        </el-main>
+        <el-footer class="p-0" height="60px">
+          <page-footer />
+        </el-footer>
+      </el-container>
+    </el-container>
     <file-transfer-panel />
-  </div>
+  </el-config-provider>
 </template>
 
 <script setup>
 import { ElConfigProvider } from "element-plus";
 import zhCn from "element-plus/lib/locale/lang/zh-cn";
 import FileTransferPanel from "components/common/feedback/PjFileTransferPanel.vue";
+import PageSideBar from "layout/PageSideBar.vue";
+import PageFooter from "layout/PageFooter.vue";
+import PageHeader from "layout/PageHeader.vue";
+import { ref } from "vue";
+
+const collapse = ref(false);
+const sidebarWidth = "210px";
+const sidebarCollapseWidth = "64px";
 </script>
 
 <style lang="less">
@@ -25,5 +57,11 @@ body,
 #app {
   width: 100%;
   height: 100%;
+}
+</style>
+
+<style lang="less" scoped>
+.container-aside {
+  transition: width 0.28s;
 }
 </style>

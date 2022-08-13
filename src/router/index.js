@@ -1,20 +1,29 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import { Edit } from "@element-plus/icons-vue";
 
 export const routes = [
   {
     path: "/",
     redirect: "/index",
-    title: "起始页",
-    hidden: true,
+    meta: {
+      title: "起始页",
+      hidden: true,
+    },
   },
   {
     path: "/home",
-    title: "起始页",
+    meta: {
+      title: "起始页",
+      icon: Edit,
+    },
     children: [
       {
         path: "/home2",
         name: "Home2",
-        title: "首页",
+        meta: {
+          title: "首页",
+          icon: Edit,
+        },
         component: () => import("views/HomeView.vue"),
       },
     ],
@@ -22,14 +31,19 @@ export const routes = [
   {
     path: "/index",
     name: "Index",
-    title: "首页",
+    meta: {
+      title: "首页",
+      icon: Edit,
+    },
     component: () => import("views/IndexView.vue"),
   },
   {
     path: "/login",
     name: "Login",
-    title: "登录页",
-    hidden: true,
+    meta: {
+      title: "登录页",
+      hidden: true,
+    },
     component: () => import("views/LoginView.vue"),
   },
 ];
@@ -37,9 +51,4 @@ export const routes = [
 export const router = createRouter({
   history: createWebHashHistory(),
   routes,
-});
-
-router.beforeEach((to, from, next) => {
-  console.log(to);
-  next();
 });

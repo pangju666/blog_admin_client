@@ -1,22 +1,8 @@
 <template>
-  <div>
-    <div class="navbar">
-      <route-bread-crumb
-        id="breadcrumb-container"
-        class="breadcrumb-container"
-      />
-    </div>
-    <div>
-      <pj-route-menu :routes="routes" />
-    </div>
-  </div>
+  <div></div>
 </template>
 
-<script setup>
-import RouteBreadCrumb from "components/custom/navigation/RouteBreadCrumb.vue";
-import PjRouteMenu from "components/common/navigation/PjRouteMenu.vue";
-import { routes } from "@/router";
-</script>
+<script setup></script>
 
 <style lang="less" scoped>
 .navbar {

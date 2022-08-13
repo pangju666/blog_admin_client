@@ -4,32 +4,26 @@
   </svg>
 </template>
 
-<script>
-export default {
-  name: "PjSvgIcon",
-  props: {
-    svgStyle: {
-      type: String,
-      default: "",
-    },
-    icon: {
-      type: String,
-      required: true,
-    },
-    size: {
-      type: Number,
-      default: 18,
-    },
+<script setup>
+import { computed } from "vue";
+
+const props = defineProps({
+  svgStyle: {
+    type: String,
+    default: "",
   },
-  computed: {
-    svgName() {
-      return `#${this.icon}`;
-    },
-    style() {
-      return `font-size: ${this.size}px`;
-    },
+  icon: {
+    type: String,
+    required: true,
   },
-};
+  size: {
+    type: Number,
+    default: 18,
+  },
+});
+
+const svgName = computed(() => `#${props.icon}`);
+const style = computed(() => `font-size: ${props.size}px`);
 </script>
 
 <style>

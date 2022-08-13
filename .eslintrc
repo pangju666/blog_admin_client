@@ -9,7 +9,6 @@
     "plugin:vue/vue3-recommended",
     "plugin:prettier/recommended"
   ],
-  "parser": "vue-eslint-parser",
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
@@ -20,7 +19,10 @@
   "rules": {
     "no-console": "warn",
     "no-debugger": "warn",
-    "linebreak-style": "off",
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
     "vue/require-default-prop": "off"
   }
 }

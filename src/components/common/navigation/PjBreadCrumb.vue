@@ -9,7 +9,7 @@
         <slot :index="index" :item="item">
           <span
             class="cursor-pointer"
-            @click.prevent="$emit('click-item', item, index)"
+            @click="$emit('click-item', item, index)"
             >{{ typeof item === "object" ? item[valueKey] : item }}</span
           >
         </slot>

@@ -10,9 +10,9 @@
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "**/*.{vue,js,json,less}": [
-      "eslint **/*.{vue,js,json} --fix",
-      "prettier --write **/*.{vue,js,json}"
+    "**/*.{vue,js}": [
+      "eslint **/*.{vue,js} --fix",
+      "prettier --write **/*.{vue,js}"
     ]
   },
   "dependencies": {
@@ -40,7 +40,6 @@
     "unplugin-auto-import": "^0.11.0",
     "unplugin-element-plus": "^0.4.1",
     "unplugin-vue-components": "^0.22.0",
-    "vite": "^3.0.0",
-    "vue-eslint-parser": "^9.0.3"
+    "vite": "^3.0.0"
   }
 }

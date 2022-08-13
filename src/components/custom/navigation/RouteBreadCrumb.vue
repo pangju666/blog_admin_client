@@ -5,9 +5,25 @@
 
 <script setup>
 import PjBreadCrumb from "components/common/navigation/PjBreadCrumb.vue";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
-const routes = ref(["ces", "cesadad"]);
+const route = ref("首页");
+
+const routes = ref([route, ...["ces", "cesadad"]]);
+
+// eslint-disable-next-line no-unused-vars
+const looseJsonParse = (object, key) => {
+  let props = key;
+  if (!Array.isArray(key)) {
+    props = props.replace(/\[/g, ".").replace(/]/g, "").split(".");
+  }
+  return props.reduce((value, prop) => value[prop], object);
+};
+
+onMounted(() => {
+  const obj = { meta: { title: "ceshi" } };
+  console.log(looseJsonParse(obj, "meta.title"));
+});
 </script>
 
 <style scoped></style>
