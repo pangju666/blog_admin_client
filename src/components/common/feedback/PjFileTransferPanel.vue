@@ -48,7 +48,7 @@ const visible = computed({
 });
 
 const cancel = (row) => {
-  store.cancelDownload({ cancelToken: row.cancel, fileId: row.fileId });
+  store.cancelDownload(row.cancel, row.fileId);
 };
 </script>
 

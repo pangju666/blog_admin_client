@@ -12,7 +12,6 @@
 
 <script setup>
 import PjRouteMenu from "components/common/navigation/PjRouteMenu.vue";
-import { defineProps } from "vue";
 
 defineProps({
   collapse: {

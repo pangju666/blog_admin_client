@@ -1,29 +1,60 @@
 <template>
-  <!--  <pj-bread-crumb v-slot="slotProps" :items="routes"></pj-bread-crumb>-->
-  <pj-bread-crumb :items="routes"></pj-bread-crumb>
+  <pj-bread-crumb
+    :items="currentRoute"
+    value-key="title"
+    @click-item="onBreadCrumbClickItem"
+  ></pj-bread-crumb>
 </template>
 
 <script setup>
 import PjBreadCrumb from "components/common/navigation/PjBreadCrumb.vue";
-import { onMounted, ref } from "vue";
+import { onMounted, computed } from "vue";
+import { useRouter } from "vue-router";
+import { useRouteStore } from "@/store/RouteStore.js";
+import { ArrayUtils, StringUtils } from "pangju-utils";
 
-const route = ref("首页");
+const router = useRouter();
+const routeTitleStore = useRouteStore();
 
-const routes = ref([route, ...["ces", "cesadad"]]);
-
-// eslint-disable-next-line no-unused-vars
-const looseJsonParse = (object, key) => {
-  let props = key;
-  if (!Array.isArray(key)) {
-    props = props.replace(/\[/g, ".").replace(/]/g, "").split(".");
-  }
-  return props.reduce((value, prop) => value[prop], object);
-};
+const currentRoute = computed(() => routeTitleStore.currentRoute);
 
 onMounted(() => {
-  const obj = { meta: { title: "ceshi" } };
-  console.log(looseJsonParse(obj, "meta.title"));
+  const routeMap = new Map();
+  readRoutes(routeMap, router.options.routes, [
+    {
+      title: "首页",
+      path: "/",
+    },
+  ]);
+  routeTitleStore.routeMap = routeMap;
 });
+
+const readRoutes = (routeMap, routes, parentRoutes) => {
+  for (let route of routes) {
+    if (StringUtils.equalsAny(route.path, "/")) {
+      continue;
+    }
+
+    let currentRoutes = [
+      {
+        title: route.meta.title,
+        path: route.path,
+      },
+    ];
+    if (ArrayUtils.isNotEmpty(parentRoutes) && route.name !== "Index") {
+      currentRoutes = [...parentRoutes, ...currentRoutes];
+    }
+    routeMap.set(route.name, currentRoutes);
+
+    if (ArrayUtils.isNotEmpty(route.children)) {
+      readRoutes(routeMap, route.children, parentRoutes);
+    }
+  }
+};
+
+const onBreadCrumbClickItem = (item) => {
+  router.push(item.path);
+};
 </script>
 
-<style scoped></style>
+<style lang="less" scoped></style>

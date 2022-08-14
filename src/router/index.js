@@ -1,32 +1,14 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import { Edit } from "@element-plus/icons-vue";
+import { useRouteStore } from "@/store/RouteStore.js";
 
-export const routes = [
+const routes = [
   {
     path: "/",
     redirect: "/index",
     meta: {
-      title: "起始页",
       hidden: true,
     },
-  },
-  {
-    path: "/home",
-    meta: {
-      title: "起始页",
-      icon: Edit,
-    },
-    children: [
-      {
-        path: "/home2",
-        name: "Home2",
-        meta: {
-          title: "首页",
-          icon: Edit,
-        },
-        component: () => import("views/HomeView.vue"),
-      },
-    ],
   },
   {
     path: "/index",
@@ -46,9 +28,36 @@ export const routes = [
     },
     component: () => import("views/LoginView.vue"),
   },
+  {
+    path: "/home",
+    name: "Home",
+    meta: {
+      title: "测试页1",
+      icon: Edit,
+    },
+    children: [
+      {
+        path: "/home2",
+        name: "Home2",
+        meta: {
+          title: "测试页2",
+          icon: Edit,
+        },
+        component: () => import("views/HomeView.vue"),
+      },
+    ],
+  },
 ];
 
 export const router = createRouter({
   history: createWebHashHistory(),
   routes,
+});
+
+// eslint-disable-next-line no-unused-vars
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title;
+
+  const routeTitleStore = useRouteStore();
+  routeTitleStore.setCurrentRoute(to.name);
 });

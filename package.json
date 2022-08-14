@@ -22,7 +22,7 @@
     "element-plus": "^2.2.12",
     "js-file-download": "^0.4.12",
     "nanoid": "^4.0.0",
-    "pangju-utils": "^2.2.3",
+    "pangju-utils": "^2.3.0",
     "pinia": "^2.0.17",
     "vue": "^3.2.37",
     "vue-router": "^4.1.3"

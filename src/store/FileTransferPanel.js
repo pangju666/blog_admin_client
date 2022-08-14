@@ -12,7 +12,7 @@ export const useFileTransferStore = defineStore("fileTransferStore", {
     };
   },
   actions: {
-    removeById(context, id) {
+    removeById(id) {
       setTimeout(() => {
         this.fileList = this.fileList.filter((file) => file.fileId !== id);
         if (this.fileList.length === 0) {
@@ -43,7 +43,7 @@ export const useFileTransferStore = defineStore("fileTransferStore", {
         this.fileList.push(file);
       }
     },
-    downloadFile(context, { fileUrl, fileName }) {
+    downloadFile(fileUrl, fileName) {
       this.visible = true;
 
       const cancelToken = createCancelToken();
@@ -78,7 +78,7 @@ export const useFileTransferStore = defineStore("fileTransferStore", {
         fileDownload(res.data, fileName);
       });
     },
-    cancelDownload({ cancelToken, fileId }) {
+    cancelDownload(cancelToken, fileId) {
       cancelToken.cancel("暂停下载");
       this.removeById(fileId);
       if (this.fileList.length === 0) {

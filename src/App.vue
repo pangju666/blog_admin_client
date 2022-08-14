@@ -10,11 +10,11 @@
           :collapse-width="sidebarCollapseWidth"
         />
       </el-aside>
-      <el-container class="h-100 p-10">
+      <el-container class="h-100">
         <el-header class="p-0" height="60px">
           <page-header @change="collapse = $event" />
         </el-header>
-        <el-main style="height: calc(100% - 120px)">
+        <el-main class="route-container">
           <!--          <transition>
                       <keep-alive>
                         <router-view />
@@ -63,5 +63,10 @@ body,
 <style lang="less" scoped>
 .container-aside {
   transition: width 0.28s;
+}
+
+.route-container {
+  height: calc(100% - 120px);
+  padding: 10px;
 }
 </style>

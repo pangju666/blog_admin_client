@@ -7,6 +7,4 @@ import { router } from "@/router";
 import "assets/css/index.less";
 import "assets/css/toast.less";
 
-const pina = createPinia();
-
-createApp(App).use(pina).use(router).mount("#app");
+createApp(App).use(createPinia()).use(router).mount("#app");
