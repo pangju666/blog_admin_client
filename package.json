@@ -4,8 +4,9 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
+    "prepare": "husky install",
     "dev": "vite --mode develop",
-    "build": "vite build",
+    "build": "vite build --mode production",
     "preview": "vite preview --mode develop",
     "lint-staged": "lint-staged"
   },

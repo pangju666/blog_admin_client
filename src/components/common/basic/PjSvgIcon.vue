@@ -20,10 +20,16 @@ const props = defineProps({
     type: Number,
     default: 18,
   },
+  color: {
+    type: String,
+    default: "currentColor",
+  },
 });
 
 const svgName = computed(() => `#${props.icon}`);
-const style = computed(() => `font-size: ${props.size}px`);
+const style = computed(
+  () => `font-size: ${props.size}px; fill: ${props.color}`
+);
 </script>
 
 <style>
@@ -31,7 +37,6 @@ const style = computed(() => `font-size: ${props.size}px`);
   width: 1em;
   height: 1em;
   vertical-align: -0.15em;
-  fill: currentColor;
   overflow: hidden;
 }
 </style>

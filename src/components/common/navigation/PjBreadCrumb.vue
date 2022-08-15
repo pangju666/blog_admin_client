@@ -1,25 +1,21 @@
 <template>
-  <el-breadcrumb
-    :separator="separator"
-    :separator-icon="separatorIcon"
-    class="breadcrumb"
-  >
-    <transition-group name="breadcrumb">
-      <el-breadcrumb-item v-for="(item, index) in items" :key="index">
-        <slot :index="index" :item="item">
-          <span
-            class="cursor-pointer"
-            @click="$emit('click-item', item, index)"
-            >{{ typeof item === "object" ? item[valueKey] : item }}</span
-          >
-        </slot>
-      </el-breadcrumb-item>
-    </transition-group>
+  <el-breadcrumb :separator="separator" :separator-icon="separatorIcon">
+    <el-breadcrumb-item v-for="(item, index) in items" :key="index">
+      <slot :index="index" :item="item">
+        <span
+          :style="{ cursor: cursor }"
+          @click="onBreadCrumbItemClick(item, index)"
+          >{{ typeof item === "object" ? getBreadCrumbItem(item) : item }}</span
+        >
+      </slot>
+    </el-breadcrumb-item>
   </el-breadcrumb>
 </template>
 
 <script setup>
-defineProps({
+import { ObjectUtils } from "pangju-utils";
+
+const props = defineProps({
   separator: {
     type: String,
     default: "/",
@@ -35,16 +31,26 @@ defineProps({
     type: String,
     default: "value",
   },
+  cursor: {
+    type: String,
+    default: "pointer",
+  },
+  readonly: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-defineEmits(["click-item"]);
+const emits = defineEmits(["click-item"]);
+
+const getBreadCrumbItem = (item) =>
+  ObjectUtils.getProp(item, props.valueKey, null);
+
+const onBreadCrumbItemClick = (item, index) => {
+  if (!props.readonly) {
+    emits("click-item", item, index);
+  }
+};
 </script>
 
-<style lang="less" scoped>
-.breadcrumb.el-breadcrumb {
-  display: inline-block;
-  font-size: 14px;
-  line-height: 50px;
-  margin-left: 8px;
-}
-</style>
+<style lang="less" scoped></style>

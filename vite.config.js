@@ -26,6 +26,7 @@ export default defineConfig({
       layout: path.resolve(__dirname, "src/layout"),
       apis: path.resolve(__dirname, "src/apis"),
       assets: path.resolve(__dirname, "src/assets"),
+      utils: path.resolve(__dirname, "src/utils"),
     },
     extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json", ".vue"],
   },

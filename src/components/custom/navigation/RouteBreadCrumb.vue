@@ -1,5 +1,6 @@
 <template>
   <pj-bread-crumb
+    class="route-bread-crumb"
     :items="currentRoute"
     value-key="title"
     @click-item="onBreadCrumbClickItem"
@@ -8,7 +9,7 @@
 
 <script setup>
 import PjBreadCrumb from "components/common/navigation/PjBreadCrumb.vue";
-import { onMounted, computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useRouteStore } from "@/store/RouteStore.js";
 import { ArrayUtils, StringUtils } from "pangju-utils";
@@ -57,4 +58,11 @@ const onBreadCrumbClickItem = (item) => {
 };
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less">
+.route-bread-crumb.el-breadcrumb {
+  display: inline-block;
+  font-size: 14px;
+  line-height: 50px;
+  margin-left: 8px;
+}
+</style>

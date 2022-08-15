@@ -150,6 +150,10 @@ const makeCode = (e, n) => {
   }
   emits("change", identifyCode.value);
 };
+
+defineExpose({
+  changeCode,
+});
 </script>
 
 <style scoped>

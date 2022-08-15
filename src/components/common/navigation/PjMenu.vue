@@ -1,25 +1,25 @@
 <template>
   <el-menu
     ref="menuRef"
+    :active-text-color="activeTextColor"
+    :background-color="backgroundColor"
     :collapse="collapse"
     :collapse-transition="collapseTransition"
     :default-active="defaultActive"
     :default-openeds="defaultOpeneds"
     :ellipsis="ellipsis"
     :menu-trigger="menuTrigger"
-    :active-text-color="activeTextColor"
-    :background-color="backgroundColor"
-    :text-color="textColor"
     :mode="mode"
     :router="router"
+    :text-color="textColor"
     :unique-opened="uniqueOpened"
     class="pj-menu"
   >
     <pj-menu-item
       v-for="item in menuItems"
       :key="item.index"
-      :item="item"
       :hide-timeout="itemHideTimeout"
+      :item="item"
       :popper-class="itemPopperClass"
       :popper-offset="itemPopperOffset"
       :show-timeout="itemShowTimeout"
@@ -28,10 +28,19 @@
       <template #sub-menu-title="scope">
         <slot :item="scope.item" name="sub-menu-title">
           <template v-if="item.icon">
-            <el-icon v-if="typeof item.icon === 'object'" :size="itemIconSize">
+            <el-icon
+              v-if="typeof item.icon === 'object'"
+              :size="itemIconSize"
+              :style="`color: ${itemIconColor}`"
+            >
               <component :is="item.icon" />
             </el-icon>
-            <svg-icon v-else :icon="item.icon" :size="itemIconSize" />
+            <pj-svg-icon
+              v-else
+              :color="itemIconColor"
+              :icon="item.icon"
+              :size="itemIconSize"
+            />
           </template>
           <span>{{ scope.item.title }}</span>
         </slot>
@@ -39,16 +48,25 @@
       <template #default="scope">
         <slot :item="scope.item">
           <template v-if="item.icon">
-            <el-icon v-if="typeof item.icon === 'object'" :size="itemIconSize">
+            <el-icon
+              v-if="typeof item.icon === 'object'"
+              :size="itemIconSize"
+              :style="`color: ${itemIconColor}`"
+            >
               <component :is="item.icon" />
             </el-icon>
-            <svg-icon v-else :icon="item.icon" :size="itemIconSize" />
+            <pj-svg-icon
+              v-else
+              :color="itemIconColor"
+              :icon="item.icon"
+              :size="itemIconSize"
+            />
           </template>
         </slot>
       </template>
       <template #title="scope">
         <slot :item="scope.item" name="title">
-          {{ scope.item.title }}
+          <span>{{ scope.item.title }}</span>
         </slot>
       </template>
     </pj-menu-item>
@@ -57,8 +75,8 @@
 
 <script setup>
 import PjMenuItem from "./PjMenuItem.vue";
-import SvgIcon from "../basic/PjSvgIcon.vue";
-import { onMounted, ref, shallowRef } from "vue";
+import PjSvgIcon from "../basic/PjSvgIcon.vue";
+import { markRaw, onMounted, ref } from "vue";
 import { ArrayUtils, ObjectUtils } from "pangju-utils";
 
 const props = defineProps({
@@ -132,6 +150,10 @@ const props = defineProps({
   },
   itemIconSize: {
     type: Number,
+  },
+  itemIconColor: {
+    type: String,
+    default: "inherit",
   },
   itemPopperClass: {
     type: String,
@@ -277,7 +299,7 @@ const getMenuItems = (items = []) => {
       ObjectUtils.nonNull(menuItem.icon) &&
       typeof menuItem.icon === "object"
     ) {
-      menuItem.icon = shallowRef({ ...menuItem.icon });
+      menuItem.icon = markRaw({ ...menuItem.icon });
     }
 
     if (itemTitleProp.deep) {
@@ -309,10 +331,6 @@ defineExpose({
 </script>
 
 <style>
-.pj-menu {
-  border: none;
-}
-
 .pj-menu + .el-menu--collapse {
   width: v-bind(width);
 }

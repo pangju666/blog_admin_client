@@ -11,6 +11,7 @@
     :item-disabled-key="itemDisabledKey"
     :item-hidden-key="itemHiddenKey"
     :item-hide-timeout="itemHideTimeout"
+    :item-icon-color="itemIconColor"
     :item-icon-key="itemIconKey"
     :item-icon-size="itemIconSize"
     :item-popper-class="itemPopperClass"
@@ -25,8 +26,7 @@
     item-index-key="path"
     mode="vertical"
     router
-  >
-  </pj-menu>
+  />
 </template>
 
 <script setup>
@@ -62,6 +62,9 @@ defineProps({
   },
   itemIconSize: {
     type: Number,
+  },
+  itemIconColor: {
+    type: String,
   },
   itemPopperClass: {
     type: String,
