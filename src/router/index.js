@@ -54,11 +54,9 @@ export const router = createRouter({
   routes,
 });
 
-// eslint-disable-next-line no-unused-vars
-router.beforeEach((to, from, next) => {
+router.beforeEach((to) => {
   document.title = to.meta.title;
 
-  const routeTitleStore = useRouteStore();
-  console.log(to);
-  routeTitleStore.currentRoute = to;
+  const routeStore = useRouteStore();
+  routeStore.setCurrentRoute(to);
 });

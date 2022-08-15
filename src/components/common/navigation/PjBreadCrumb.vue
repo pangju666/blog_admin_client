@@ -1,12 +1,14 @@
 <template>
   <el-breadcrumb :separator="separator" :separator-icon="separatorIcon">
-    <el-breadcrumb-item v-for="(item, index) in items" :key="index">
-      <slot :index="index" :item="item">
-        <span
-          :style="{ cursor: cursor }"
-          @click="onBreadCrumbItemClick(item, index)"
-          >{{ typeof item === "object" ? getBreadCrumbItem(item) : item }}</span
-        >
+    <el-breadcrumb-item
+      v-for="(item, index) in items"
+      :key="index"
+      :class="getItemClass(item, index)"
+      :style="{ cursor: readonly ? 'default' : cursor }"
+      @click="onBreadCrumbItemClick(item, index)"
+    >
+      <slot :index="index" :item="item" :item-name="getItem(item)">
+        <span>{{ getItem(item) }}</span>
       </slot>
     </el-breadcrumb-item>
   </el-breadcrumb>
@@ -39,12 +41,27 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  itemClass: {
+    type: [String, Function],
+  },
 });
 
 const emits = defineEmits(["click-item"]);
 
-const getBreadCrumbItem = (item) =>
-  ObjectUtils.getProp(item, props.valueKey, null);
+const getItem = (item) => {
+  if (typeof item === "object") {
+    return ObjectUtils.getProp(item, props.valueKey, null);
+  }
+  return item;
+};
+const getItemClass = (item, index) => {
+  if (ObjectUtils.isNull(props.itemClass)) {
+    return "";
+  }
+  return typeof props.itemClass === "function"
+    ? props.itemClass(item, index)
+    : props.itemClass;
+};
 
 const onBreadCrumbItemClick = (item, index) => {
   if (!props.readonly) {

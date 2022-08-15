@@ -15,12 +15,11 @@
           <page-header @change="collapse = $event" />
         </el-header>
         <el-main class="route-container">
-          <!--          <transition>
-                      <keep-alive>
-                        <router-view />
-                      </keep-alive>
-                    </transition>-->
-          <router-view />
+          <router-view v-slot="{ Component }">
+            <keep-alive>
+              <component :is="Component" />
+            </keep-alive>
+          </router-view>
         </el-main>
         <el-footer class="p-0" height="60px">
           <page-footer />
@@ -40,7 +39,7 @@ import PageFooter from "layout/PageFooter.vue";
 import PageHeader from "layout/PageHeader.vue";
 import { ref } from "vue";
 
-const collapse = ref(false);
+let collapse = ref(false);
 const sidebarWidth = "210px";
 const sidebarCollapseWidth = "64px";
 </script>
