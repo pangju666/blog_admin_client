@@ -1,57 +1,32 @@
 <template>
   <pj-bread-crumb
     class="route-bread-crumb"
-    :items="currentRoute"
-    value-key="title"
+    :items="routes"
+    value-key="meta.title"
     @click-item="onBreadCrumbClickItem"
   ></pj-bread-crumb>
 </template>
 
 <script setup>
 import PjBreadCrumb from "components/common/navigation/PjBreadCrumb.vue";
-import { computed, onMounted } from "vue";
+import { computed } from "vue";
 import { useRouter } from "vue-router";
 import { useRouteStore } from "@/store/RouteStore.js";
-import { ArrayUtils, StringUtils } from "pangju-utils";
+import { ObjectUtils } from "pangju-utils";
 
 const router = useRouter();
-const routeTitleStore = useRouteStore();
+const routeStore = useRouteStore();
 
-const currentRoute = computed(() => routeTitleStore.currentRoute);
-
-onMounted(() => {
-  const routeMap = new Map();
-  readRoutes(routeMap, router.options.routes, [
-    {
-      title: "首页",
-      path: "/",
-    },
-  ]);
-  routeTitleStore.routeMap = routeMap;
-});
-
-const readRoutes = (routeMap, routes, parentRoutes) => {
-  for (let route of routes) {
-    if (StringUtils.equalsAny(route.path, "/")) {
-      continue;
-    }
-
-    let currentRoutes = [
-      {
-        title: route.meta.title,
-        path: route.path,
-      },
-    ];
-    if (ArrayUtils.isNotEmpty(parentRoutes) && route.name !== "Index") {
-      currentRoutes = [...parentRoutes, ...currentRoutes];
-    }
-    routeMap.set(route.name, currentRoutes);
-
-    if (ArrayUtils.isNotEmpty(route.children)) {
-      readRoutes(routeMap, route.children, parentRoutes);
-    }
+const routes = computed(() => {
+  let routes = [{ meta: { title: "首页", path: "/index" } }];
+  if (
+    ObjectUtils.nonNull(routeStore.currentRoute) &&
+    routeStore.currentRoute.path !== "/index"
+  ) {
+    routes = [...routes, ...routeStore.currentRoute.matched];
   }
-};
+  return routes;
+});
 
 const onBreadCrumbClickItem = (item) => {
   router.push(item.path);

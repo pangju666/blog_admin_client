@@ -59,5 +59,6 @@ router.beforeEach((to, from, next) => {
   document.title = to.meta.title;
 
   const routeTitleStore = useRouteStore();
-  routeTitleStore.setCurrentRoute(to.name);
+  console.log(to);
+  routeTitleStore.currentRoute = to;
 });

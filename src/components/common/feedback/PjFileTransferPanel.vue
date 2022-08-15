@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import { useFileTransferStore } from "@/store/FileTransferPanel.js";
+import { useFileTransferStore } from "@/store/FileTransferStore.js";
 import { Close } from "@element-plus/icons-vue";
 import { computed } from "vue";
 
