@@ -14,6 +14,7 @@
     :type="type"
     @click="onBreadCrumbItemClick(tag, index)"
     @close="onBreadCrumbItemClose(tag, index)"
+    @contextmenu="$emit('tag-contextmenu', $event, tag, index)"
   >
     <slot :index="index" :tag="tag" :tag-name="getTag(tag)">
       <span>
@@ -87,7 +88,7 @@ const props = defineProps({
   },
 });
 
-const emits = defineEmits(["click-tag", "close-tag"]);
+const emits = defineEmits(["click-tag", "close-tag", "tag-contextmenu"]);
 
 const getTag = (tag) => {
   if (typeof tag === "object") {

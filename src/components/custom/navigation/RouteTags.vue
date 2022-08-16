@@ -8,6 +8,7 @@
         :tags="tags"
         value-key="meta.title"
         @click-tag="onClickTag"
+        @tag-contextmenu="onTagContextmenu"
       >
         <span v-if="activeIndex === scope.index" class="round-icon"></span>
         <span>{{ scope.tagName }}</span>
@@ -46,6 +47,9 @@ const getCloseable = (tag) => {
 const onClickTag = (item) => {
   router.push(item.path);
 };
+
+// eslint-disable-next-line no-unused-vars
+const onTagContextmenu = (event, tag, index) => {};
 </script>
 
 <style lang="less" scoped>

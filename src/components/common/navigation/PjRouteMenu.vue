@@ -26,6 +26,7 @@
     item-index-key="path"
     mode="vertical"
     router
+    class="route-menu"
   />
 </template>
 
@@ -99,7 +100,7 @@ defineProps({
   },
   itemIconKey: {
     type: String,
-    default: "meta.icon",
+    default: "meta.icons",
   },
   itemTitleKey: {
     type: String,
@@ -122,4 +123,8 @@ onMounted(() => {
 });
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.route-menu {
+  border-right: none;
+}
+</style>

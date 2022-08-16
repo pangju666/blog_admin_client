@@ -1,5 +1,8 @@
 /* eslint-disable no-undef */
 import Vue from "@vitejs/plugin-vue";
+import Compression from "vite-plugin-compression";
+import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
+import VueSetupExtend from "vite-plugin-vue-setup-extend";
 import AutoImport from "unplugin-auto-import/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import Components from "unplugin-vue-components/vite";
@@ -9,6 +12,12 @@ import * as path from "path";
 
 export default defineConfig({
   plugins: [
+    createSvgIconsPlugin({
+      iconDirs: [path.resolve(__dirname, "src/assets/icons")],
+      symbolId: "blog-icon-[name]",
+      svgoOptions: true,
+    }),
+    VueSetupExtend(),
     AutoImport({
       resolvers: [ElementPlusResolver()],
     }),
@@ -17,6 +26,10 @@ export default defineConfig({
     }),
     ElementPlus(),
     Vue(),
+    Compression({
+      ext: ".gz",
+      deleteOriginFile: false,
+    }),
   ],
   resolve: {
     alias: {
