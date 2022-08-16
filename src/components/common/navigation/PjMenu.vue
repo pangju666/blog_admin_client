@@ -27,18 +27,18 @@
     >
       <template #sub-menu-title="scope">
         <slot :item="scope.item" name="sub-menu-title">
-          <template v-if="item.icon">
+          <template v-if="scope.item.icon">
             <el-icon
-              v-if="typeof item.icon === 'object'"
+              v-if="typeof scope.item.icon === 'object'"
               :size="itemIconSize"
               :style="`color: ${itemIconColor}`"
             >
-              <component :is="item.icon" />
+              <component :is="scope.item.icon" />
             </el-icon>
             <pj-svg-icon
               v-else
               :color="itemIconColor"
-              :icon="item.icon"
+              :icon="scope.item.icon"
               :size="itemIconSize"
             />
           </template>
@@ -47,18 +47,18 @@
       </template>
       <template #default="scope">
         <slot :item="scope.item">
-          <template v-if="item.icon">
+          <template v-if="scope.item.icon">
             <el-icon
-              v-if="typeof item.icon === 'object'"
+              v-if="typeof scope.item.icon === 'object'"
               :size="itemIconSize"
               :style="`color: ${itemIconColor}`"
             >
-              <component :is="item.icon" />
+              <component :is="scope.item.icon" />
             </el-icon>
             <pj-svg-icon
               v-else
               :color="itemIconColor"
-              :icon="item.icon"
+              :icon="scope.item.icon"
               :size="itemIconSize"
             />
           </template>
