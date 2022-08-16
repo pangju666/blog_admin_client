@@ -15,11 +15,13 @@
       </pj-tags>
     </div>
   </el-scrollbar>
+  <vue3-menus v-model:open="showContextmenu" :event="eventRef" :menus="menus">
+  </vue3-menus>
 </template>
 
 <script setup>
 import PjTags from "components/common/navigation/PjTags.vue";
-import { computed, onBeforeMount } from "vue";
+import { computed, nextTick, onBeforeMount, ref, shallowRef } from "vue";
 import { useRouteStore } from "@/store/RouteStore.js";
 import { useRouter } from "vue-router";
 
@@ -30,6 +32,36 @@ defineProps({});
 
 const tags = computed(() => routeStore.routeHistory);
 const activeIndex = computed(() => routeStore.currentRouteIndex);
+
+const showContextmenu = ref(false);
+const eventRef = ref({});
+
+const menus = shallowRef([
+  {
+    label: "刷新",
+    click: () => {
+      window.history.back(-1);
+    },
+  },
+  {
+    label: "关闭",
+    click: () => {
+      window.history.back(-1);
+    },
+  },
+  {
+    label: "关闭其他",
+    click: () => {
+      window.history.back(-1);
+    },
+  },
+  {
+    label: "关闭所有",
+    click: () => {
+      window.history.back(-1);
+    },
+  },
+]);
 
 onBeforeMount(() => {
   routeStore.setCurrentRoute({ meta: { title: "首页" }, path: "/index" });
@@ -49,7 +81,14 @@ const onClickTag = (item) => {
 };
 
 // eslint-disable-next-line no-unused-vars
-const onTagContextmenu = (event, tag, index) => {};
+const onTagContextmenu = (event, tag, index) => {
+  showContextmenu.value = false;
+  nextTick(() => {
+    eventRef.value = event;
+    showContextmenu.value = true;
+  });
+  event.preventDefault();
+};
 </script>
 
 <style lang="less" scoped>
