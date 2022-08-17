@@ -30,9 +30,7 @@ const routes = computed(() => {
 });
 
 const getItemClass = (item, index) => {
-  return index === routes.value.length - 1 && index !== 0
-    ? "active-bread-crumb-item"
-    : "";
+  return index === routes.value.length - 1 ? "active-bread-crumb-item" : "";
 };
 
 const onBreadCrumbClickItem = (item) => {

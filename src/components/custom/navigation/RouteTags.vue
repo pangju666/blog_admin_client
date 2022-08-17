@@ -1,5 +1,5 @@
 <template>
-  <el-scrollbar height="49px">
+  <el-scrollbar height="50px">
     <div class="tags-view">
       <pj-tags
         v-slot="scope"
@@ -15,8 +15,8 @@
       </pj-tags>
     </div>
   </el-scrollbar>
-  <vue3-menus v-model:open="showContextmenu" :event="eventRef" :menus="menus">
-  </vue3-menus>
+  <!--  <vue3-menus v-model:open="showContextmenu" :event="eventRef" :menus="menus">
+  </vue3-menus>-->
 </template>
 
 <script setup>
@@ -36,6 +36,7 @@ const activeIndex = computed(() => routeStore.currentRouteIndex);
 const showContextmenu = ref(false);
 const eventRef = ref({});
 
+// eslint-disable-next-line no-unused-vars
 const menus = shallowRef([
   {
     label: "刷新",

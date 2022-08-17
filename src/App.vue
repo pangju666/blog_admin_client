@@ -5,10 +5,7 @@
         :width="collapse ? sidebarCollapseWidth : sidebarWidth"
         class="h-100 container-aside"
       >
-        <page-side-bar
-          :collapse="collapse"
-          :collapse-width="sidebarCollapseWidth"
-        />
+        <page-side-bar />
       </el-aside>
       <el-container class="h-100">
         <el-header class="p-0" height="60px">
