@@ -1,5 +1,5 @@
 <template>
-  <el-scrollbar height="50px">
+  <el-scrollbar height="40px">
     <div class="tags-view">
       <pj-tags
         v-slot="scope"

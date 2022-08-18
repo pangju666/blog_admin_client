@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import { Edit } from "@element-plus/icons-vue";
 import { useRouteStore } from "@/store/RouteStore.js";
+import nprogcess from "nprogress";
 
 const routes = [
   {
@@ -25,6 +26,7 @@ const routes = [
     meta: {
       title: "登录页",
       hidden: true,
+      fullScreen: true,
     },
     component: () => import("views/LoginView.vue"),
   },
@@ -57,6 +59,12 @@ export const router = createRouter({
 router.beforeEach((to) => {
   document.title = to.meta.title;
 
+  nprogcess.start();
+
   const routeStore = useRouteStore();
   routeStore.setCurrentRoute(to);
+});
+
+router.afterEach(() => {
+  nprogcess.done();
 });

@@ -4,7 +4,7 @@
       <route-bread-crumb />
       <div class="right-navbar">
         <el-icon :size="25" class="full-screen-icon cursor-pointer">
-          <full-screen />
+          <full-screen @click="onClickFullScreen" />
         </el-icon>
         <el-dropdown trigger="click">
           <span class="cursor-pointer display-flex">
@@ -35,6 +35,36 @@
 import { ArrowDown, FullScreen, User } from "@element-plus/icons-vue";
 import RouteBreadCrumb from "components/custom/navigation/RouteBreadCrumb.vue";
 import RouteTags from "components/custom/navigation/RouteTags.vue";
+import { onBeforeUnmount, onMounted, ref } from "vue";
+import screenFull from "screenfull";
+import { ElNotification } from "element-plus";
+
+const isFullScreen = ref(false);
+
+onMounted(() => {
+  if (screenFull.isEnabled) {
+    screenFull.on(
+      "change",
+      () => (isFullScreen.value = screenFull.isFullscreen)
+    );
+  }
+});
+onBeforeUnmount(() => {
+  if (screenFull.isEnabled) {
+    screenFull.off(
+      "change",
+      () => (isFullScreen.value = screenFull.isFullscreen)
+    );
+  }
+});
+
+const onClickFullScreen = () => {
+  if (!screenFull.isEnabled) {
+    ElNotification.warning("您的浏览器不支持此功能");
+  } else {
+    screenFull.toggle();
+  }
+};
 </script>
 
 <style lang="less" scoped>

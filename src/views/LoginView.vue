@@ -1,10 +1,10 @@
 <template>
   <div class="h-center container">
-    <!--    <img class="background-image" src="@/assets/images/bg.jpg" />-->
+    <img class="background-image" src="@/assets/images/background.png" />
     <div class="login-box">
       <div class="header">
         <div class="title">
-          <!--          <img src="@/assets/images/logo.png" />-->
+          <img src="@/assets/images/vite.svg" />
         </div>
         <div class="sub-title">后台管理系统</div>
       </div>
@@ -17,14 +17,14 @@
         <el-form-item prop="username">
           <el-input v-model="formModel.username" class="login-form-input">
             <template #prefix>
-              <svg-icon icon="gtzicon-wode1" />
+              <el-icon> <User /> </el-icon>
             </template>
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-input v-model="formModel.password" class="login-form-input">
             <template #prefix>
-              <svg-icon icon="gtzicon-mima" />
+              <el-icon> <Lock /> </el-icon>
             </template>
           </el-input>
         </el-form-item>
@@ -35,7 +35,7 @@
               class="login-form-input"
             >
               <template #prefix>
-                <svg-icon icon="gtzicon-yuechimima" />
+                <el-icon> <Key /> </el-icon>
               </template>
             </el-input>
             <verification-code-box
@@ -59,10 +59,10 @@
 <script setup>
 import { onMounted, reactive, ref } from "vue";
 import VerificationCodeBox from "components/common/feedback/PjVerificationCodeBox.vue";
-import SvgIcon from "@/components/common/basic/PjSvgIcon.vue";
 import { StringUtils } from "pangju-utils";
 import { Toast } from "@/utils/Toast";
 import { useRouter } from "vue-router";
+import { Key, Lock, User } from "@element-plus/icons-vue";
 
 const router = useRouter();
 
@@ -148,7 +148,9 @@ const onLoginButtonClick = () => {
   overflow: hidden;
 
   .background-image {
-    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
   }
 
   .login-box {
@@ -169,7 +171,6 @@ const onLoginButtonClick = () => {
 
       .sub-title {
         font-size: 18px;
-        // font-family: PingFang SC-正规体, PingFang SC;
         font-weight: normal;
         color: #000000;
         line-height: 22px;
@@ -199,7 +200,6 @@ const onLoginButtonClick = () => {
 
       span {
         font-size: 28px;
-        font-family: PingFangSC-Regular, serif;
         font-weight: normal;
         color: #ffffff;
         line-height: 34px;

@@ -1,29 +1,26 @@
 <template>
   <el-config-provider :locale="zhCn">
-    <el-container class="wh-100">
-      <el-aside
-        :width="collapse ? sidebarCollapseWidth : sidebarWidth"
-        class="h-100 container-aside"
-      >
-        <page-side-bar />
-      </el-aside>
-      <el-container class="h-100">
-        <el-header class="p-0" height="60px">
-          <page-header @change="collapse = $event" />
-        </el-header>
-        <el-main class="route-container">
-          <router-view v-slot="{ Component }">
+    <router-view v-slot="{ Component, route }">
+      <component :is="Component" v-if="route.meta.fullScreen" />
+      <div v-else class="container">
+        <div class="container-aside">
+          <page-side-bar @expand-change="collapse = $event" />
+        </div>
+        <div class="container-header">
+          <page-header />
+        </div>
+        <div class="container-body">
+          <transition mode="out-in" name="el-fade-in-linear">
             <keep-alive>
-              <component :is="Component" />
+              <el-scrollbar class="wh-100" height="100%">
+                <component :is="Component" />
+              </el-scrollbar>
             </keep-alive>
-          </router-view>
-        </el-main>
-        <el-footer class="p-0" height="60px">
-          <page-footer />
-        </el-footer>
-      </el-container>
-    </el-container>
-    <file-transfer-panel />
+          </transition>
+        </div>
+      </div>
+      <file-transfer-panel />
+    </router-view>
   </el-config-provider>
 </template>
 
@@ -32,13 +29,13 @@ import { ElConfigProvider } from "element-plus";
 import zhCn from "element-plus/lib/locale/lang/zh-cn";
 import FileTransferPanel from "components/common/feedback/PjFileTransferPanel.vue";
 import PageSideBar from "layout/PageSideBar.vue";
-import PageFooter from "layout/PageFooter.vue";
 import PageHeader from "layout/PageHeader.vue";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 let collapse = ref(false);
-const sidebarWidth = "210px";
-const sidebarCollapseWidth = "64px";
+const sidebarWidth = computed(() => {
+  return collapse.value ? "64px" : "210px";
+});
 </script>
 
 <style lang="less">
@@ -57,12 +54,35 @@ body,
 </style>
 
 <style lang="less" scoped>
-.container-aside {
-  transition: width 0.28s;
-}
+.container {
+  width: 100%;
+  height: 100%;
 
-.route-container {
-  height: calc(100% - 120px);
-  padding: 10px;
+  .container-aside {
+    position: fixed;
+    overflow: hidden;
+    height: 100%;
+    width: v-bind(sidebarWidth);
+    z-index: 1000;
+  }
+
+  .container-header {
+    position: fixed;
+    left: v-bind(sidebarWidth);
+    height: 90px;
+    width: calc(100% - v-bind(sidebarWidth));
+    z-index: 1000;
+  }
+
+  .container-body {
+    position: relative;
+    left: v-bind(sidebarWidth);
+    overflow: hidden;
+    width: calc(100% - v-bind(sidebarWidth));
+    top: 90px;
+    height: calc(100% - 90px);
+    background-color: #f1f5fb;
+    padding: 20px;
+  }
 }
 </style>
